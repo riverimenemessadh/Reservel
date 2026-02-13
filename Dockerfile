@@ -1,63 +1,36 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    curl \
     git \
+    curl \
     zip \
     unzip \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    rm -rf /var/lib/apt/lists/*
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql
 
-# Enable Apache modules
-RUN a2enmod rewrite headers
-
-# Install PHP extensions (FIXED - added all necessary extensions)
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
-
-# Set working directory
-WORKDIR /var/www/html
-
-# Copy application files
-COPY . .
-
-# Install composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install PHP dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Set working directory
+WORKDIR /app
 
-# Install Node dependencies and build assets
-RUN npm install && npm run build
+# Copy application
+COPY . .
 
-# Create necessary directories
-RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views && \
-    chmod -R 755 storage bootstrap/cache
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Set Apache document root
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf && \
-    echo "<Directory /var/www/html/public>" >> /etc/apache2/sites-available/000-default.conf && \
-    echo "    AllowOverride All" >> /etc/apache2/sites-available/000-default.conf && \
-    echo "    Require all granted" >> /etc/apache2/sites-available/000-default.conf && \
-    echo "</Directory>" >> /etc/apache2/sites-available/000-default.conf
+# Create storage directories
+RUN mkdir -p storage/logs storage/framework/{cache,sessions,views} bootstrap/cache && \
+    chmod -R 777 storage bootstrap/cache
 
-# Expose port (Railway needs port 8080, not 80)
+# Expose port
 EXPOSE 8080
 
-# Update Apache to listen on Railway's PORT
-RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf && \
-    sed -i 's/:80/:8080/g' /etc/apache2/sites-available/000-default.conf
-
-# Copy startup script
-COPY docker-startup.sh /docker-startup.sh
-RUN chmod +x /docker-startup.sh
-
-# Start with migrations and Apache
-CMD ["/docker-startup.sh"]
+# Simple start command - no fancy scripts
+CMD php artisan config:cache && \
+    php artisan migrate --force && \
+    php artisan serve --host=0.0.0.0 --port=8080
