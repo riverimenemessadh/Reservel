@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use App\Models\Booking;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+
+class ProfileController extends Controller
+{
+    
+    public function show(Request $request, User $user = null): View
+    {
+        $targetUser = $user && $user->exists ? $user : $request->user();
+
+        $bookings = Booking::where('user_id', $targetUser->id)
+            ->whereDate('start_time', today())
+            ->where('status', 'active')
+            ->with('asset')
+            ->get()
+            ->groupBy(function($booking) {
+                return $booking->start_time->format('H:i') . ' - ' . $booking->end_time->format('H:i');
+            });
+
+        return view('profile.show', [
+            'user' => $targetUser,
+            'bookings' => $bookings
+        ]);
+    }
+}
