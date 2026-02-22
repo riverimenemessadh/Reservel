@@ -41,7 +41,7 @@
                 html += '<div class="card h-100 border-0 shadow-sm cursor-pointer hover-card-lift" style="transition: all 0.3s ease;" onclick="showAssetModal(' + asset.id + ')">';
 
                 if (asset.image) {
-                    html += '<img src="/storage/' + asset.image + '" class="card-img-top" style="height: 150px; object-fit: cover; cursor: pointer;">';
+                    html += '<img src="' + asset.image + '" class="card-img-top" style="height: 150px; object-fit: cover; cursor: pointer;">';
                 } else {
                     html += '<div class="bg-light d-flex align-items-center justify-content-center" style="height: 150px;">';
                     html += '<i class="fas ' + icon + ' fa-3x text-muted"></i>';

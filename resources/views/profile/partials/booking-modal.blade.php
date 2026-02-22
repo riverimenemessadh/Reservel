@@ -39,7 +39,7 @@
                             <option value="" disabled selected>{{ __('messages.room_dropdown') }}</option>
                             @foreach (\App\Models\Asset::where('type', 'room')->where('status', 'available')->get() as $room)
                                 <option value="{{ $room->id }}"
-                                    data-image="{{ $room->image ? asset('storage/' . $room->image) : '' }}"
+                                    data-image="{{ $room->image ?? '' }}"
                                     data-name="{{ $room->name }}">
                                     {{ $room->name }}
                                 </option>

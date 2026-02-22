@@ -20,7 +20,7 @@
                                     $hasPendingReport = $asset->reports()->where('status', 'pending')->exists();
                                 @endphp
                                 <option value="{{ $asset->id }}"
-                                    data-image="{{ $asset->image ? asset('storage/' . $asset->image) : '' }}"
+                                    data-image="{{ $asset->image ?? '' }}"
                                     {{ $hasPendingReport ? 'disabled' : '' }}>
 
                                     {{ $asset->name }}
