@@ -7,15 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Reservel') }}</title>
-
     <link rel="icon" type="image/x-icon" href="{{ asset('Reservel-favicon.ico') }}">
-
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    
     <style>
         body {
             transition: direction 0.3s ease;
@@ -49,13 +45,13 @@
             {{ $slot }}
         </div>
     </div>
-    
+
     <script>
         // Ensure locale is properly set and page direction updates
         document.documentElement.lang = '{{ app()->getLocale() }}';
         document.documentElement.dir = '{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}';
     </script>
-    <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 
 </html>
