@@ -27,7 +27,7 @@
                     <div class="card h-100 border-0 shadow-sm hover-card-lift">
                         <div class="cursor-pointer" onclick="window.location.href='{{ route('assets.show', $item) }}'">
                             @if ($item->image)
-                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                     class="asset-image" style="height: 200px; object-fit: cover; width: 100%;">
                             @else
                                 <div class="asset-image bg-light d-flex align-items-center justify-content-center"
