@@ -3,9 +3,9 @@
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm">
                 @if ($asset->image)
-                    <img src="{{ asset('storage/' . $asset->image) }}" alt="{{ $asset->name }}"
+                    <img src="{{ $asset->image }}" alt="{{ $asset->name }}"
                         class="card-img-top cursor-pointer" style="max-height: 400px; object-fit: cover;"
-                        onclick="openImageLightbox('{{ asset('storage/' . $asset->image) }}')">
+                        onclick="openImageLightbox('{{ $asset->image }}')">
                 @else
                     <div class="bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
                         <i class="fas fa-{{ $asset->type == 'room' ? 'building' : 'laptop' }} fa-5x text-muted"></i>

@@ -63,7 +63,7 @@
                                         name="asset_ids[]" value="{{ $item->id }}"
                                         id="equipment{{ $item->id }}">
                                     @if ($item->image)
-                                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                        <img src="{{ $item->image }}" alt="{{ $item->name }}"
                                             class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                     @else
                                         <div class="bg-light rounded me-2 d-flex align-items-center justify-content-center"

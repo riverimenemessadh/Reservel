@@ -12,7 +12,7 @@
 
                         @if($asset->image)
                             <div class="mb-3 text-center">
-                                <img src="{{ asset('storage/' . $asset->image) }}" alt="{{ $asset->name }}" class="img-fluid rounded" style="max-height: 200px;">
+                                <img src="{{ $asset->image }}" alt="{{ $asset->name }}" class="img-fluid rounded" style="max-height: 200px;">
                             </div>
                         @endif
 
