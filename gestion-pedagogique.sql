@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 02, 2026 at 09:25 PM
+-- Generation Time: Feb 22, 2026 at 03:50 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.26
 
@@ -43,10 +43,9 @@ CREATE TABLE `assets` (
 --
 
 INSERT INTO `assets` (`id`, `name`, `description`, `image`, `type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Amphithéâtre Pasteur', 'Grand amphi en gradins d’une capacité de 250 places assises.', 'assets/o6BOCfzo5Sf03aJOko42ZLAjmjL1wAaIuatr5aGk.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-02 14:46:48'),
+(1, 'Amphithéâtre Pasteur', 'Grand amphi en gradins d’une capacité de 250 places assises.', 'assets/o6BOCfzo5Sf03aJOko42ZLAjmjL1wAaIuatr5aGk.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-03 02:32:26'),
 (2, 'Salle de Conférence', 'Espace de 100 m² avec une configuration de 60 places en style théâtre.', 'assets/kOwacwJGcP4g1egOLFWdzkeI0aeZJKYn12IswWCv.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-02 20:24:03'),
-(3, 'Laboratoire Alpha', 'Espace de travaux pratiques spacieux avec 24 paillasses individuelles.', 'assets/FCRV69r1Z2jXJvdIbafi5WlrVyJnbtZ95sYd2vz0.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-02 21:20:56'),
-(4, 'Laboratoire Bêta', 'Salle de manipulation technique équipée de 20 postes de travail fixes.', 'assets/td4TySnXIkChzy7Cjp7Piu8RW6ib7WfwhegHDtIw.jpg', 'room', 'in_repair', '2026-01-16 11:08:09', '2026-02-02 20:24:33'),
+(4, 'Laboratoire Bêta', 'Salle de manipulation technique équipée de 20 postes de travail fixes.', 'assets/td4TySnXIkChzy7Cjp7Piu8RW6ib7WfwhegHDtIw.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-03 09:35:29'),
 (5, 'Laboratoire Gamma', 'Grand plateau technique de 120 m² pouvant accueillir 30 étudiants.', 'assets/0Tq6xI3N12AXrgdHdBabcVuIbgp8xFp3KQqdTEMg.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-02 20:24:00'),
 (6, 'Salle de Cours 101', 'Salle de cours magistral standard avec une capacité de 80 places.', 'assets/sSzwSXK00X3tMlskEgmvKrbjzKhta1b9FpwqbkUN.jpg', 'room', 'available', '2026-01-16 11:08:09', '2026-02-02 19:00:07'),
 (7, 'Salle de Cours 102', 'Salle de cours de taille moyenne offrant 50 places assises.', 'assets/FNLS5O59MAhbOxjAls7hT9mpHtzszUTSsSaG7X0H.webp', 'room', 'available', '2026-01-16 11:08:09', '2026-02-02 21:21:00'),
@@ -57,7 +56,7 @@ INSERT INTO `assets` (`id`, `name`, `description`, `image`, `type`, `status`, `c
 (12, 'Microphone HF Sans Fil', 'Système de micro-cravate professionnel pour l’Amphithéâtre Pasteur.', 'assets/9LpaMNWqPbLumAb8nn037Ov8rNaUyPNEBR2GLeiJ.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-01-20 04:50:23'),
 (13, 'Oscilloscope Numérique', 'Appareil de mesure 2 voies haute précision pour le Laboratoire de Physique.', 'assets/cRAkrfx85E4rcd02ooDTN9bYSX2lK832YP3tAp0f.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-02 20:23:32'),
 (15, 'Projecteur Intelligent Borrego T7 – WiFi & LED', 'haute luminosité et connectivité intelligente', 'assets/9AQwm5Bq4klkFPAtL91X5licqdQABqRTlHDhRpLJ.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-02 20:24:06'),
-(16, 'Vidéoprojecteur Mobile', 'Unité portable haute luminosité pour les salles de TD non équipées.', 'assets/0ZzTuppA7Z9oO1HzLWBv2lrSGfgRN5JbEUjE7TWJ.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-02 14:46:48'),
+(16, 'Vidéoprojecteur Mobile', 'Unité portable haute luminosité pour les salles de TD non équipées.', 'assets/0ZzTuppA7Z9oO1HzLWBv2lrSGfgRN5JbEUjE7TWJ.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-13 14:55:20'),
 (17, 'Station de Soudage Weller', 'Poste de soudure de précision pour les circuits du Labo Réseaux & Cyber.', 'assets/og1dFgBNyEYBbkhv8Uu0dCVKl654ozF38cA8Q0l7.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-02 14:46:48'),
 (18, 'Tablette Graphique Wacom', 'Outil d’annotation numérique pour les présentations en Salle de Conférence.', 'assets/L3kfz9EwHOTCWmq4irBgoe83PcosBFQnlC7Ola71.jpg', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-02 14:46:48'),
 (19, 'Valise de Robotique', 'Kit complet comprenant moteurs et micro-contrôleurs pour les projets de TD.', 'assets/5iQFJocXGyG8kqPL4GAgPAWdps3JzMTAJzlkVIEG.webp', 'equipment', 'available', '2026-01-16 11:08:09', '2026-02-02 14:40:33');
@@ -166,7 +165,47 @@ INSERT INTO `bookings` (`id`, `user_id`, `asset_id`, `start_time`, `end_time`, `
 (93, 1, 17, '2026-02-02 14:00:00', '2026-02-02 16:11:00', 'cancelled', '2026-02-02 14:46:02', '2026-02-02 14:46:48'),
 (94, 1, 18, '2026-02-02 14:00:00', '2026-02-02 16:11:00', 'cancelled', '2026-02-02 14:46:02', '2026-02-02 14:46:48'),
 (95, 2, 8, '2026-02-03 12:40:00', '2026-02-03 16:11:00', 'cancelled', '2026-02-02 18:07:10', '2026-02-02 19:36:54'),
-(97, 2, 6, '2026-02-02 19:11:00', '2026-02-02 20:00:00', 'active', '2026-02-02 18:27:37', '2026-02-02 18:27:37');
+(97, 2, 6, '2026-02-02 19:11:00', '2026-02-02 20:00:00', 'active', '2026-02-02 18:27:37', '2026-02-02 18:27:37'),
+(98, 3, 2, '2026-01-30 10:00:00', '2026-01-30 12:00:00', 'active', '2026-01-29 13:30:00', '2026-01-29 13:30:00'),
+(99, 3, 12, '2026-01-30 10:00:00', '2026-01-30 12:00:00', 'active', '2026-01-29 13:30:00', '2026-01-29 13:30:00'),
+(100, 3, 13, '2026-01-30 10:00:00', '2026-01-30 12:00:00', 'active', '2026-01-29 13:30:00', '2026-01-29 13:30:00'),
+(102, 4, 15, '2026-01-28 13:00:00', '2026-01-28 16:00:00', 'active', '2026-01-27 09:00:00', '2026-01-27 09:00:00'),
+(103, 4, 17, '2026-01-28 13:00:00', '2026-01-28 16:00:00', 'active', '2026-01-27 09:00:00', '2026-01-27 09:00:00'),
+(104, 4, 18, '2026-01-28 13:00:00', '2026-01-28 16:00:00', 'active', '2026-01-27 09:00:00', '2026-01-27 09:00:00'),
+(105, 5, 1, '2026-01-26 14:00:00', '2026-01-26 17:00:00', 'active', '2026-01-25 11:00:00', '2026-01-25 11:00:00'),
+(106, 6, 5, '2026-01-23 08:00:00', '2026-01-23 11:00:00', 'cancelled', '2026-01-22 15:00:00', '2026-01-23 06:30:00'),
+(107, 6, 16, '2026-01-23 08:00:00', '2026-01-23 11:00:00', 'cancelled', '2026-01-22 15:00:00', '2026-01-23 06:30:00'),
+(108, 6, 19, '2026-01-23 08:00:00', '2026-01-23 11:00:00', 'cancelled', '2026-01-22 15:00:00', '2026-01-23 06:30:00'),
+(109, 7, 9, '2026-01-21 09:00:00', '2026-01-21 12:00:00', 'active', '2026-01-20 14:00:00', '2026-01-20 14:00:00'),
+(110, 7, 12, '2026-01-21 09:00:00', '2026-01-21 12:00:00', 'active', '2026-01-20 14:00:00', '2026-01-20 14:00:00'),
+(111, 2, 10, '2026-01-18 11:00:00', '2026-01-18 13:00:00', 'active', '2026-01-17 17:00:00', '2026-01-17 17:00:00'),
+(112, 3, 7, '2026-01-15 07:00:00', '2026-01-15 09:00:00', 'active', '2026-01-14 13:00:00', '2026-01-14 13:00:00'),
+(113, 3, 15, '2026-01-15 07:00:00', '2026-01-15 09:00:00', 'active', '2026-01-14 13:00:00', '2026-01-14 13:00:00'),
+(114, 3, 16, '2026-01-15 07:00:00', '2026-01-15 09:00:00', 'active', '2026-01-14 13:00:00', '2026-01-14 13:00:00'),
+(115, 4, 11, '2026-01-13 14:00:00', '2026-01-13 16:00:00', 'cancelled', '2026-01-12 09:00:00', '2026-01-13 07:00:00'),
+(116, 5, 8, '2026-01-11 10:00:00', '2026-01-11 13:00:00', 'active', '2026-01-10 15:00:00', '2026-01-10 15:00:00'),
+(117, 5, 13, '2026-01-11 10:00:00', '2026-01-11 13:00:00', 'active', '2026-01-10 15:00:00', '2026-01-10 15:00:00'),
+(118, 5, 17, '2026-01-11 10:00:00', '2026-01-11 13:00:00', 'active', '2026-01-10 15:00:00', '2026-01-10 15:00:00'),
+(119, 6, 2, '2026-01-08 15:00:00', '2026-01-08 18:00:00', 'active', '2026-01-07 10:00:00', '2026-01-07 10:00:00'),
+(121, 7, 18, '2026-01-06 08:00:00', '2026-01-06 11:00:00', 'active', '2026-01-05 12:00:00', '2026-01-05 12:00:00'),
+(122, 7, 19, '2026-01-06 08:00:00', '2026-01-06 11:00:00', 'active', '2026-01-05 12:00:00', '2026-01-05 12:00:00'),
+(123, 2, 1, '2026-02-03 09:00:00', '2026-02-03 12:00:00', 'cancelled', '2026-02-02 09:00:00', '2026-02-03 02:31:21'),
+(124, 2, 16, '2026-02-03 09:00:00', '2026-02-03 12:00:00', 'active', '2026-02-02 09:00:00', '2026-02-02 09:00:00'),
+(125, 3, 5, '2026-02-04 13:00:00', '2026-02-04 16:00:00', 'active', '2026-02-02 10:00:00', '2026-02-02 10:00:00'),
+(126, 3, 12, '2026-02-04 13:00:00', '2026-02-04 16:00:00', 'active', '2026-02-02 10:00:00', '2026-02-02 10:00:00'),
+(127, 3, 13, '2026-02-04 13:00:00', '2026-02-04 16:00:00', 'active', '2026-02-02 10:00:00', '2026-02-02 10:00:00'),
+(128, 4, 9, '2026-02-05 07:00:00', '2026-02-05 10:00:00', 'active', '2026-02-02 11:00:00', '2026-02-02 11:00:00'),
+(129, 4, 15, '2026-02-05 07:00:00', '2026-02-05 10:00:00', 'active', '2026-02-02 11:00:00', '2026-02-02 11:00:00'),
+(130, 4, 17, '2026-02-05 07:00:00', '2026-02-05 10:00:00', 'active', '2026-02-02 11:00:00', '2026-02-02 11:00:00'),
+(131, 5, 11, '2026-02-06 14:00:00', '2026-02-06 17:00:00', 'active', '2026-02-02 12:00:00', '2026-02-02 12:00:00'),
+(132, 6, 4, '2026-02-07 10:00:00', '2026-02-07 13:00:00', 'cancelled', '2026-02-02 13:00:00', '2026-02-03 09:35:05'),
+(133, 6, 13, '2026-02-07 10:00:00', '2026-02-07 13:00:00', 'active', '2026-02-02 13:00:00', '2026-02-02 13:00:00'),
+(134, 6, 18, '2026-02-07 10:00:00', '2026-02-07 13:00:00', 'active', '2026-02-02 13:00:00', '2026-02-02 13:00:00'),
+(135, 7, 2, '2026-02-10 08:00:00', '2026-02-10 11:00:00', 'active', '2026-02-02 14:00:00', '2026-02-02 14:00:00'),
+(136, 7, 12, '2026-02-10 08:00:00', '2026-02-10 11:00:00', 'active', '2026-02-02 14:00:00', '2026-02-02 14:00:00'),
+(137, 7, 19, '2026-02-10 08:00:00', '2026-02-10 11:00:00', 'active', '2026-02-02 14:00:00', '2026-02-02 14:00:00'),
+(138, 2, 7, '2026-02-03 08:50:00', '2026-02-03 09:03:00', 'active', '2026-02-02 23:19:02', '2026-02-02 23:19:02'),
+(139, 2, 12, '2026-02-03 08:50:00', '2026-02-03 09:03:00', 'active', '2026-02-02 23:19:02', '2026-02-02 23:19:02');
 
 -- --------------------------------------------------------
 
@@ -303,6 +342,30 @@ CREATE TABLE `reports` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `user_id`, `asset_id`, `problem_description`, `possible_cause`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 13, 'L\'oscilloscope ne s\'allume pas', 'Problème d\'alimentation électrique', 'resolved', '2026-01-05 09:30:00', '2026-01-07 13:00:00'),
+(2, 3, 15, 'Le projecteur affiche une image floue', 'Lentille sale', 'resolved', '2026-01-08 08:00:00', '2026-01-10 10:00:00'),
+(3, 4, 12, 'Microphone sans fil produit des craquements', 'Batterie faible ou interférence', 'resolved', '2026-01-10 13:20:00', '2026-01-12 15:00:00'),
+(4, 5, 17, 'La station de soudage ne chauffe plus', 'Résistance défaillante', 'resolved', '2026-01-12 10:00:00', '2026-01-15 09:00:00'),
+(6, 7, 18, 'La tablette graphique n\'est pas reconnue', 'Driver obsolète', 'resolved', '2026-01-16 14:00:00', '2026-01-20 08:00:00'),
+(7, 2, 16, 'Vidéoprojecteur s\'éteint après 15 minutes', 'Surchauffe', 'resolved', '2026-01-18 09:45:00', '2026-01-22 13:30:00'),
+(8, 3, 19, 'Moteurs de la valise robotique défectueux', 'Connexions desserrées', 'resolved', '2026-01-20 12:00:00', '2026-02-03 02:12:51'),
+(9, 4, 4, 'Odeur de gaz dans le laboratoire Bêta', 'Fuite potentielle', 'resolved', '2026-01-24 07:00:00', '2026-02-03 02:12:47'),
+(10, 5, 7, 'Climatisation ne fonctionne pas', 'Filtre encrassé', 'resolved', '2026-01-25 08:30:00', '2026-02-03 02:12:42'),
+(11, 6, 2, 'Écran de projection bloqué', 'Mécanisme grippé', 'resolved', '2026-01-27 10:00:00', '2026-02-03 02:12:35'),
+(12, 7, 8, 'Tables bancales dans la salle', 'Pieds desserrés', 'resolved', '2026-01-28 13:00:00', '2026-02-03 02:12:30'),
+(14, 3, 9, 'Prises électriques ne fonctionnent plus', 'Disjoncteur déclenché', 'resolved', '2026-01-30 07:45:00', '2026-02-03 02:12:27'),
+(15, 4, 10, 'Porte de la salle ne ferme pas correctement', 'Serrure défectueuse', 'resolved', '2026-01-31 12:20:00', '2026-02-03 02:12:23'),
+(16, 5, 11, 'Éclairage clignote dans la salle', 'Ballast défectueux', 'resolved', '2026-02-01 08:00:00', '2026-02-03 02:12:19'),
+(17, 6, 1, 'Système audio de l\'amphi en panne', 'Amplificateur défaillant', 'resolved', '2026-02-02 07:30:00', '2026-02-03 02:12:14'),
+(18, 7, 6, 'Tableau blanc n\'est plus effaçable', 'Surface endommagée', 'resolved', '2026-02-02 10:45:00', '2026-02-03 02:12:10'),
+(19, 2, 15, 'Projecteur affiche des bandes verticales', 'DMD chip défaillant', 'resolved', '2026-02-02 13:00:00', '2026-02-03 02:12:06'),
+(21, 1, 4, 'testtttttttt', NULL, 'resolved', '2026-02-03 09:35:05', '2026-02-03 09:35:29');
+
 -- --------------------------------------------------------
 
 --
@@ -323,9 +386,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('cjhBJBrLqZ33py0sDd4cbMTlDP7Nlwi1eOwhfAa3', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiN3hPNEpDbE53SWxSVnFQMDgwcDVPOHJLWWY3UWdqakRsV2JCMTZGUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ub3RpZmljYXRpb25zIjtzOjU6InJvdXRlIjtzOjE5OiJub3RpZmljYXRpb25zLmluZGV4Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1770064204),
-('KyC59UbRT5KA8Nnjui65oaoj7eJLA0zJL0Db5hVb', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNXljMmJndjZuUGJwUkFIcjlDVkNBNUdFVVFiWXpmNThkeGZSQ2ZmRCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ub3RpZmljYXRpb25zIjtzOjU6InJvdXRlIjtzOjE5OiJub3RpZmljYXRpb25zLmluZGV4Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1770067526),
-('ndnGLhOLesrUtnJr3qFp8khF11Z9HzlabQQJ68Qa', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUlM4RjFCNTJFZ21MaGhuMUlERFBKMWVyWm1RaXV4V0NrVWpydHN0NiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7Tjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1770060832);
+('JGh5AZQfViXniC5jan4daI0XoLkrocjilLhbwEsw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoic1lRMlJDeU9UWXRLM1U4ckxtc1FjaTlydG1LUGFjS2NDeU5nYXpwcSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ub3RpZmljYXRpb25zIjtzOjU6InJvdXRlIjtzOjE5OiJub3RpZmljYXRpb25zLmluZGV4Ijt9czo2OiJsb2NhbGUiO3M6MjoiZnIiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1771771180);
 
 -- --------------------------------------------------------
 
@@ -352,7 +413,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `profile_picture`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Dr. Mourad Mezache', 'admin@institute.dz', NULL, '$2y$12$8DF2ki.E5Xfm/8cTAs1Q7.BXHj9B34kByoDTf6NCoHH6Mkqso.g1e', 'admin', NULL, NULL, '2026-01-16 11:08:09', '2026-01-16 11:08:09'),
-(2, 'Prof. Lydia Idir', 'lydia.idir@institute.dz', NULL, '$2y$12$NtR0pqDXU4K.M/41s712sedkSS2IzCUDO65B28BJVGH5fY8HiMlIe', 'teacher', NULL, 'qfYY6L0OQGCAwvxANjZXzmvp0Sq3IRi2n3wqUxsE2maMXg7o0BrYxZuQ0C1V', '2026-01-16 11:08:09', '2026-01-16 11:08:09'),
+(2, 'Prof. Lydia Idir', 'lydia.idir@institute.dz', NULL, '$2y$12$NtR0pqDXU4K.M/41s712sedkSS2IzCUDO65B28BJVGH5fY8HiMlIe', 'teacher', NULL, '8u4WZcbOAGbtlZBtIOxVqAsYnB7Gna8g0ID2dEXBdarxO1HMIsMdiJEqEbFY', '2026-01-16 11:08:09', '2026-01-16 11:08:09'),
 (3, 'Prof. Bachir Saaidia', 'bachir.saaidia@institute.dz', NULL, '$2y$12$XFj1CEI7rY5ujm.MnFdl8uxNqWgXyCxrPTfBs4ZfbJu1.JV6YKEUW', 'teacher', NULL, NULL, '2026-01-16 11:08:09', '2026-01-16 11:08:09'),
 (4, 'Prof. Amel Afia', 'amel.afia@institute.dz', NULL, '$2y$12$DjwaK6n.s9q3mRyTDT3qneg4QyHRzm6V6/G7Jv7fkMk7a6m09u8mu', 'teacher', NULL, NULL, '2026-01-16 11:08:09', '2026-01-16 11:08:09'),
 (5, 'Prof. Sihem Aimeur', 'sihem.aimeur@institute.dz', NULL, '$2y$12$YGXDhiZMJq.TAvbGbwpxQeCCTuGf2Ks7eqoY5fOliVQ4yWEfI.KuO', 'teacher', NULL, NULL, '2026-01-16 11:08:09', '2026-01-16 11:08:09'),
@@ -462,7 +523,7 @@ ALTER TABLE `assets`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -486,7 +547,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`

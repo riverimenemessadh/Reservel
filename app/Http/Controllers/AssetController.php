@@ -19,7 +19,7 @@ class AssetController extends Controller
     public function index()
     {
         $this->bookingService->updateAssetStatuses();
-        
+
         $assets = Asset::orderBy('type')->orderBy('name')->get();
         $rooms = $assets->where('type', 'room');
         $equipment = $assets->where('type', 'equipment');
@@ -36,7 +36,7 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Asset::class);
-        
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -47,7 +47,7 @@ class AssetController extends Controller
         $data = $request->only(['name', 'description', 'type']);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('assets', 'public');
+            $data['image'] = 'data:' . $request->file('image')->getMimeType() . ';base64,' . base64_encode(file_get_contents($request->file('image')->getRealPath()));
         }
 
         Asset::create($data);
@@ -58,9 +58,9 @@ class AssetController extends Controller
     public function show(Asset $asset)
     {
         $this->bookingService->updateAssetStatuses();
-        
+
         $assetId = $asset->id;
-        $asset->load(['currentBooking.user', 'reports' => function($query) use ($assetId) {
+        $asset->load(['currentBooking.user', 'reports' => function ($query) use ($assetId) {
             $query->where('asset_id', $assetId)->where('status', 'pending')->latest();
         }]);
 
@@ -76,7 +76,7 @@ class AssetController extends Controller
     public function update(Request $request, Asset $asset)
     {
         $this->authorize('update', $asset);
-        
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -86,10 +86,7 @@ class AssetController extends Controller
         $data = $request->only(['name', 'description']);
 
         if ($request->hasFile('image')) {
-            if ($asset->image) {
-                Storage::disk('public')->delete($asset->image);
-            }
-            $data['image'] = $request->file('image')->store('assets', 'public');
+            $data['image'] = 'data:' . $request->file('image')->getMimeType() . ';base64,' . base64_encode(file_get_contents($request->file('image')->getRealPath()));
         }
 
         $asset->update($data);
@@ -100,10 +97,6 @@ class AssetController extends Controller
     public function destroy(Asset $asset)
     {
         $this->authorize('delete', $asset);
-        
-        if ($asset->image) {
-            Storage::disk('public')->delete($asset->image);
-        }
 
         $asset->delete();
 
