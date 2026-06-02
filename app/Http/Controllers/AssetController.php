@@ -105,10 +105,8 @@ class AssetController extends Controller
 
         $data = $request->only(['name', 'description']);
 
-        if ($request->hasFile('image')) {
-            // Images are stored as base64 in a longText column intentionally
-            // to avoid filesystem dependencies and simplify deployment.
-            $data['image'] = 'data:' . $request->file('image')->getMimeType() . ';base64,' . base64_encode(file_get_contents($request->file('image')->getRealPath()));
+        if ($request->filled('image')) {
+            $data['image'] = $request->input('image');
         }
 
         $asset->update($data);
