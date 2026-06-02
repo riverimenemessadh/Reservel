@@ -96,17 +96,16 @@ class AssetController extends Controller
     {
         $this->authorize('update', $asset);
 
-        // Note: `status` is intentionally not validated here — it is system-managed, not user-set.
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $data = $request->only(['name', 'description']);
 
-        if ($request->filled('image')) {
-            $data['image'] = $request->input('image');
+        if ($request->hasFile('image')) {
+            $data['image'] = 'data:' . $request->file('image')->getMimeType() . ';base64,' . base64_encode(file_get_contents($request->file('image')->getRealPath()));
         }
 
         $asset->update($data);
