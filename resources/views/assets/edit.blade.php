@@ -22,17 +22,6 @@
             box-shadow: 0 0 0 3px rgba(76, 145, 131, 0.18);
         }
 
-        .dropzone-area {
-            border: 2px dashed #cbd5e1;
-            transition: border-color 0.2s, background 0.2s;
-        }
-
-        .dropzone-area:hover,
-        .dropzone-area.dragover {
-            border-color: #4c9183;
-            background: rgba(76, 145, 131, 0.04);
-        }
-
         .btn-navy {
             background: #154269;
             color: #fff;
@@ -76,7 +65,7 @@
                 {{-- Body --}}
                 <div class="bg-white px-7 py-8">
                     <form method="POST" action="{{ route('assets.update', $asset) }}"
-                        novalidate x-data="assetEditForm()">
+                        enctype="multipart/form-data" novalidate>
                         @csrf
                         @method('PUT')
 
@@ -87,13 +76,14 @@
                                     {{ __('messages.current_image') }}
                                 </p>
                                 <div class="relative group">
-                                    <img id="current-asset-image" src="{{ $asset->image }}" alt="{{ $asset->name }}"
+                                    <img src="{{ $asset->image }}" alt="{{ $asset->name }}"
                                         class="rounded-xl object-cover shadow-md"
                                         style="max-height:180px; max-width:100%; border-radius:12px;">
                                     <div class="absolute inset-0 rounded-xl bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                                         style="border-radius:12px;">
-                                        <span class="text-white text-xs font-medium"><i class="fas fa-image me-1"></i>
-                                            Replace below</span>
+                                        <span class="text-white text-xs font-medium">
+                                            <i class="fas fa-image me-1"></i>Replace below
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -148,51 +138,22 @@
                             @enderror
                         </div>
 
-                        {{-- ── Image upload dropzone ── --}}
+                        {{-- ── Image upload ── --}}
                         <div class="mb-7">
                             <label class="block text-sm font-semibold text-slate-700 mb-1.5">
                                 <i class="fas fa-image text-[#4c9183] me-1.5"></i>{{ __('messages.change_image') }}
                             </label>
-
-                            {{-- Hidden input that actually submits the base64 string --}}
-                            <input type="hidden" name="image" x-ref="imageBase64">
-
-                            {{-- Hidden file input, triggered by clicking the dropzone --}}
-                            <input type="file" id="imageFileInput" class="hidden" accept="image/*"
-                                @change="previewImage($event)">
-
-                            <div class="dropzone-area rounded-xl p-6 text-center cursor-pointer relative"
-                                style="border-radius:12px;"
-                                @dragover.prevent="$el.classList.add('dragover')"
-                                @dragleave.prevent="$el.classList.remove('dragover')"
-                                @drop.prevent="handleDrop($event); $el.classList.remove('dragover')"
-                                onclick="document.getElementById('imageFileInput').click()">
-
-                                {{-- Default prompt --}}
-                                <div x-show="!newPreview" class="pointer-events-none">
-                                    <div class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full bg-slate-100">
-                                        <i class="fas fa-cloud-arrow-up text-[#4c9183] text-xl"></i>
-                                    </div>
-                                    <p class="text-slate-600 text-sm font-medium">{{ __('messages.drag_drop_or') }}
-                                        <span class="text-[#4c9183] font-semibold">{{ __('messages.browse') }}</span>
-                                    </p>
-                                    <p class="text-slate-400 text-xs mt-1">{{ __('messages.image_formats') }}</p>
-                                </div>
-
-                                {{-- New image preview --}}
-                                <div x-show="newPreview" class="pointer-events-none flex flex-col items-center gap-2">
-                                    <img :src="newPreview" alt="preview"
-                                        class="rounded-xl object-cover shadow-md"
-                                        style="max-height:160px; max-width:100%; border-radius:12px;">
-                                    <p class="text-sm text-[#4c9183] font-medium mt-2">
-                                        <i class="fas fa-check-circle me-1"></i>
-                                        {{ __('messages.new_image_selected') }}
-                                    </p>
-                                </div>
+                            <input type="file" name="image" id="image" accept="image/*"
+                                class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800">
+                            <div id="imagePreview" class="mt-4" style="display:none;">
+                                <img id="previewImg" src="" class="rounded-xl shadow-md"
+                                    style="max-height:180px;">
+                                <p class="mt-1.5 text-xs text-[#4c9183]">
+                                    <i class="fas fa-check-circle me-1"></i>{{ __('messages.new_image_selected') }}
+                                </p>
                             </div>
-
                             @error('image')
-                                <p class="mt-1.5 text-xs text-red-500 flex items-center gap-1">
+                                <p class="mt-1.5 text-xs text-red-500">
                                     <i class="fas fa-circle-exclamation"></i> {{ $message }}
                                 </p>
                             @enderror
@@ -219,32 +180,16 @@
     </div>
 
     <script>
-        function assetEditForm() {
-            return {
-                newPreview: null,
-
-                previewImage(event) {
-                    const file = event.target.files[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.newPreview = e.target.result;
-                        this.$refs.imageBase64.value = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                },
-
-                handleDrop(event) {
-                    const file = event.dataTransfer.files[0];
-                    if (!file || !file.type.startsWith('image/')) return;
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.newPreview = e.target.result;
-                        this.$refs.imageBase64.value = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
+        document.getElementById('image').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    document.getElementById('previewImg').src = event.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
             }
-        }
+        });
     </script>
 </x-app-layout>
