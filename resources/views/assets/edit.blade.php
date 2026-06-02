@@ -75,7 +75,7 @@
 
                 {{-- Body --}}
                 <div class="bg-white px-7 py-8">
-                    <form method="POST" action="{{ route('assets.update', $asset) }}" enctype="multipart/form-data"
+                    <form method="POST" action="{{ route('assets.update', $asset) }}"
                         novalidate x-data="assetEditForm()">
                         @csrf
                         @method('PUT')
@@ -154,19 +154,23 @@
                                 <i class="fas fa-image text-[#4c9183] me-1.5"></i>{{ __('messages.change_image') }}
                             </label>
 
+                            {{-- Hidden input that actually submits the base64 string --}}
+                            <input type="hidden" name="image" x-ref="imageBase64">
+
+                            {{-- Hidden file input, triggered by clicking the dropzone --}}
+                            <input type="file" id="imageFileInput" class="hidden" accept="image/*"
+                                @change="previewImage($event)">
+
                             <div class="dropzone-area rounded-xl p-6 text-center cursor-pointer relative"
-                                style="border-radius:12px;" @dragover.prevent="$el.classList.add('dragover')"
+                                style="border-radius:12px;"
+                                @dragover.prevent="$el.classList.add('dragover')"
                                 @dragleave.prevent="$el.classList.remove('dragover')"
                                 @drop.prevent="handleDrop($event); $el.classList.remove('dragover')"
-                                @click="$refs.imageInput.click()">
-                                <input type="file" name="image" id="image" x-ref="imageInput"
-                                    class="hidden @error('image') border-red-400 @enderror" accept="image/*"
-                                    @change="previewImage($event)">
-                                <input type="hidden" name="image" x-ref="imageBase64">
+                                onclick="document.getElementById('imageFileInput').click()">
+
                                 {{-- Default prompt --}}
                                 <div x-show="!newPreview" class="pointer-events-none">
-                                    <div
-                                        class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full bg-slate-100">
+                                    <div class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full bg-slate-100">
                                         <i class="fas fa-cloud-arrow-up text-[#4c9183] text-xl"></i>
                                     </div>
                                     <p class="text-slate-600 text-sm font-medium">{{ __('messages.drag_drop_or') }}
@@ -177,9 +181,13 @@
 
                                 {{-- New image preview --}}
                                 <div x-show="newPreview" class="pointer-events-none flex flex-col items-center gap-2">
-                                    <img :src="newPreview" alt="{{ __('messages.new_preview') }}" ...>
-                                    <p ...><i class="fas fa-check-circle me-1"></i>
-                                        {{ __('messages.new_image_selected') }}</p>
+                                    <img :src="newPreview" alt="preview"
+                                        class="rounded-xl object-cover shadow-md"
+                                        style="max-height:160px; max-width:100%; border-radius:12px;">
+                                    <p class="text-sm text-[#4c9183] font-medium mt-2">
+                                        <i class="fas fa-check-circle me-1"></i>
+                                        {{ __('messages.new_image_selected') }}
+                                    </p>
                                 </div>
                             </div>
 
@@ -229,12 +237,6 @@
                 handleDrop(event) {
                     const file = event.dataTransfer.files[0];
                     if (!file || !file.type.startsWith('image/')) return;
-
-                    // Transfer to the real file input
-                    const dt = new DataTransfer();
-                    dt.items.add(file);
-                    this.$refs.imageInput.files = dt.files;
-
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         this.newPreview = e.target.result;
