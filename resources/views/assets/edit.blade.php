@@ -162,7 +162,7 @@
                                 <input type="file" name="image" id="image" x-ref="imageInput"
                                     class="hidden @error('image') border-red-400 @enderror" accept="image/*"
                                     @change="previewImage($event)">
-
+                                <input type="hidden" name="image" x-ref="imageBase64">
                                 {{-- Default prompt --}}
                                 <div x-show="!newPreview" class="pointer-events-none">
                                     <div
@@ -221,6 +221,7 @@
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         this.newPreview = e.target.result;
+                        this.$refs.imageBase64.value = e.target.result;
                     };
                     reader.readAsDataURL(file);
                 },
@@ -237,6 +238,7 @@
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         this.newPreview = e.target.result;
+                        this.$refs.imageBase64.value = e.target.result;
                     };
                     reader.readAsDataURL(file);
                 }

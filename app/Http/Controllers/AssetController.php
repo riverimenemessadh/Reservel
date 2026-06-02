@@ -100,7 +100,7 @@ class AssetController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|string',
         ]);
 
         $data = $request->only(['name', 'description']);
