@@ -14,12 +14,21 @@ class DashboardController extends Controller
 {
     protected $bookingService;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @param BookingService $bookingService
+     */
     public function __construct(BookingService $bookingService)
     {
         $this->bookingService = $bookingService;
-        $this->bookingService->updateAssetStatuses();
     }
 
+    /**
+     * Route the authenticated user to the appropriate dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $user = auth()->user();
@@ -31,6 +40,11 @@ class DashboardController extends Controller
         return $this->teacherDashboard();
     }
 
+    /**
+     * Build and return the admin dashboard view.
+     *
+     * @return \Illuminate\View\View
+     */
     protected function adminDashboard()
     {
         $todayBookings = $this->getGroupedBookings(today(), null);
@@ -47,8 +61,7 @@ class DashboardController extends Controller
             'in_use_now' => $inUseAssets->count(),
             'in_use_assets' => $inUseAssets,
             'available_assets' => Asset::where('status', 'available')->count(),
-            'total_bookings' => DB::table('bookings')
-                ->where('status', 'active')
+            'total_bookings' => Booking::where('status', 'active')
                 ->select('user_id', 'start_time', 'end_time')
                 ->distinct()
                 ->count(),
@@ -62,11 +75,14 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('todayBookings', 'recentBookings', 'stats', 'teachers'));
     }
 
+    /**
+     * Build and return the teacher dashboard view.
+     *
+     * @return \Illuminate\View\View
+     */
     protected function teacherDashboard()
     {
         $user = auth()->user();
-
-        $this->bookingService->updateAssetStatuses();
 
         $todayBookings = $this->getGroupedBookings(today(), $user->id);
         $recentBookings = $this->getGroupedBookings(now()->subDays(30), $user->id, 10);
@@ -77,6 +93,15 @@ class DashboardController extends Controller
         return view('teacher.dashboard', compact('todayBookings', 'recentBookings', 'rooms', 'equipment'));
     }
 
+    /**
+     * Retrieve bookings grouped by (user, start_time, end_time), optionally filtered
+     * by user and limited in count, starting from the given date.
+     *
+     * @param  \Illuminate\Support\Carbon  $fromDate
+     * @param  int|null                    $userId
+     * @param  int|null                    $limit
+     * @return \Illuminate\Support\Collection
+     */
     protected function getGroupedBookings($fromDate, $userId = null, $limit = null)
     {
         $query = Booking::select([
@@ -99,7 +124,7 @@ class DashboardController extends Controller
             $query->limit($limit);
         }
 
-        $groupedBookings = $query->get();
+        $groupedBookings = $query->with('user')->get();
 
         return $groupedBookings->map(function($group) {
             $bookings = Booking::where('user_id', $group->user_id)
@@ -117,7 +142,7 @@ class DashboardController extends Controller
             return (object)[
                 'id' => $group->id,
                 'user_id' => $group->user_id,
-                'user' => User::find($group->user_id),
+                'user' => $group->user,
                 'start_time' => $group->start_time,
                 'end_time' => $group->end_time,
                 'asset_count' => $group->asset_count,
@@ -125,13 +150,5 @@ class DashboardController extends Controller
                 'can_cancel' => $bookingHasNotEnded && ($isAdmin || $isBookingOwner)
             ];
         });
-    }
-
-    public function setLocale($locale)
-    {
-        if (in_array($locale, ['fr', 'ar'])) {
-            session(['locale' => $locale]);
-        }
-        return redirect()->back();
     }
 }

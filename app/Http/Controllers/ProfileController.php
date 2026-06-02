@@ -10,12 +10,18 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    
+    /**
+     * Display the profile for the given user, or the authenticated user if none specified.
+     */
     public function show(Request $request, User $user = null): View
     {
         $targetUser = $user && $user->exists ? $user : $request->user();
 
-        $bookings = Booking::where('user_id', $targetUser->id)
+        if ($request->user()->isTeacher() && $targetUser->id !== $request->user()->id) {
+            abort(403);
+        }
+
+        $bookings = $targetUser->bookings()
             ->whereDate('start_time', today())
             ->where('status', 'active')
             ->with('asset')

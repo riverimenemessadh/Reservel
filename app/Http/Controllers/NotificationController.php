@@ -9,31 +9,22 @@ use Illuminate\Notifications\DatabaseNotification;
 class NotificationController extends Controller
 {
     /**
-     * Get all notifications for the authenticated user
+     * Get all notifications for the authenticated user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
         $user = auth()->user();
-        \Log::info('Notifications index called', [
-            'user_id' => $user?->id,
-            'user_role' => $user?->role,
-            'is_admin' => $user?->isAdmin(),
-        ]);
 
         // Only admins can view notifications
-        if (!auth()->user()->isAdmin()) {
-            \Log::info('User is not admin, returning 403');
+        if (!$user->isAdmin()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
-        $notifications = auth()->user()->notifications()->latest()->get();
-        $unreadCount = auth()->user()->unreadNotifications()->count();
-
-        \Log::info('Retrieved notifications from DB', [
-            'count' => $notifications->count(),
-            'unread_count' => $unreadCount,
-            'notifications_raw' => $notifications->toArray(),
-        ]);
+        $notifications = $user->notifications()->latest()->get();
+        $unreadCount = $user->unreadNotifications()->count();
 
         return response()->json([
             'notifications' => $notifications,
@@ -42,7 +33,13 @@ class NotificationController extends Controller
     }
 
     /**
-     * Mark all notifications as read
+     * Mark all notifications as read.
+     *
+     * Note: The frontend does not currently call this method,
+     * but it is kept for future use.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function markAllAsRead(Request $request)
     {
@@ -57,7 +54,11 @@ class NotificationController extends Controller
     }
 
     /**
-     * Delete/dismiss a specific notification
+     * Delete/dismiss a specific notification.
+     *
+     * @param  \Illuminate\Notifications\DatabaseNotification  $notification
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(DatabaseNotification $notification, Request $request)
     {
