@@ -8,6 +8,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/run-seed-now-secret123', function () {
+    Artisan::call('db:seed', ['--force' => true]);
+    return 'Seeded! ' . now();
+});
+
 // Auth
 Route::get('/', function () {
     return view('auth.login');
@@ -45,5 +50,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Profile
     Route::get('/profile/{user?}', [ProfileController::class, 'show'])->name('profile.show');
 });
+
 
 require __DIR__ . '/auth.php';
