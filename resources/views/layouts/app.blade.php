@@ -42,17 +42,21 @@
         #notificationsContainer::-webkit-scrollbar {
             width: 8px;
         }
+
         #notificationsContainer::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
+
         #notificationsContainer::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 10px;
         }
+
         #notificationsContainer::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+
         /* Firefox scrollbar */
         #notificationsContainer {
             scrollbar-color: #888 #f1f1f1;
@@ -361,8 +365,8 @@
             color: #c8ddf0 !important;
             font-size: 0.875rem;
             font-weight: 500;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
             padding: 6px 12px;
             transition: background 0.2s ease, border-color 0.2s ease;
@@ -397,8 +401,8 @@
             width: 38px;
             height: 38px;
             border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
             color: #c8ddf0 !important;
             transition: all 0.2s ease;
             cursor: pointer;
@@ -435,8 +439,8 @@
 
         .mobile-menu-btn {
             display: none;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 6px;
             padding: 6px 10px;
             color: white;
@@ -452,7 +456,11 @@
         }
 
         @media (max-width: 991px) {
-            .mobile-menu-btn { display: flex; align-items: center; }
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+            }
+
             #navbarCollapse {
                 position: absolute;
                 top: 100%;
@@ -467,14 +475,22 @@
                 gap: 4px;
                 flex: unset;
             }
-            #navbarCollapse.open { display: flex !important; }
+
+            #navbarCollapse.open {
+                display: flex !important;
+            }
+
             .navbar-nav-links,
             .navbar-right-items {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 4px;
             }
-            .navbar-divider { display: none; }
+
+            .navbar-divider {
+                display: none;
+            }
+
             .user-dropdown-toggle {
                 width: 100%;
             }
@@ -483,7 +499,7 @@
         .dropdown-menu {
             border: 1px solid #e2e8f0;
             border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             padding: 6px;
         }
 
@@ -502,6 +518,7 @@
     </style>
 
     @stack('styles')
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body>
@@ -510,12 +527,15 @@
         <div class="container-fluid px-4" style="display: flex; align-items: center; height: 62px; gap: 16px;">
 
             <!-- Brand / Logo -->
-            <a href="{{ route('dashboard') }}" style="display: flex; align-items: center; text-decoration: none; flex-shrink: 0;">
-                <span style="font-size: 1.15rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">Reservel</span>
+            <a href="{{ route('dashboard') }}"
+                style="display: flex; align-items: center; text-decoration: none; flex-shrink: 0;">
+                <span
+                    style="font-size: 1.15rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">Reservel</span>
             </a>
 
             <!-- Mobile toggle -->
-            <button class="mobile-menu-btn ms-auto" id="mobileMenuBtn" aria-expanded="false" aria-controls="navbarCollapse">
+            <button class="mobile-menu-btn ms-auto" id="mobileMenuBtn" aria-expanded="false"
+                aria-controls="navbarCollapse">
                 <i class="fas fa-bars"></i>
             </button>
 
@@ -526,15 +546,15 @@
                 <div class="navbar-nav-links" style="display: flex; align-items: center; gap: 2px; flex: 1;">
                     @auth
                         <a href="{{ route('assets.index') }}"
-                           class="nav-link-item {{ request()->routeIs('assets.*') ? 'active' : '' }}">
+                            class="nav-link-item {{ request()->routeIs('assets.*') ? 'active' : '' }}">
                             <i class="fas fa-box me-1"></i>{{ __('messages.assets') }}
                         </a>
                         <a href="{{ route('bookings.index') }}"
-                           class="nav-link-item {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
+                            class="nav-link-item {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
                             <i class="fas fa-calendar-check me-1"></i>{{ __('messages.bookings') }}
                         </a>
                         <a href="{{ route('reports.index') }}"
-                           class="nav-link-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
+                            class="nav-link-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
                             <i class="fas fa-exclamation-circle me-1"></i>{{ __('messages.reports') }}
                         </a>
                     @endauth
@@ -546,18 +566,19 @@
                     <!-- Language Switcher -->
                     <div style="display: flex; align-items: center; gap: 4px;">
                         <a href="{{ route('locale.set', 'fr') }}"
-                           class="lang-pill {{ app()->getLocale() == 'fr' ? 'active-lang' : '' }}">FR</a>
+                            class="lang-pill {{ app()->getLocale() == 'fr' ? 'active-lang' : '' }}">FR</a>
                         <a href="{{ route('locale.set', 'ar') }}"
-                           class="lang-pill {{ app()->getLocale() == 'ar' ? 'active-lang' : '' }}">AR</a>
+                            class="lang-pill {{ app()->getLocale() == 'ar' ? 'active-lang' : '' }}">AR</a>
                     </div>
 
-                    <div class="navbar-divider" style="width: 1px; height: 28px; background: rgba(255,255,255,0.15);"></div>
+                    <div class="navbar-divider" style="width: 1px; height: 28px; background: rgba(255,255,255,0.15);">
+                    </div>
 
                     @auth
                         <!-- Notification Bell -->
-                        @if(auth()->user()->isAdmin())
-                            <button type="button" class="bell-btn" id="notificationBell"
-                                    data-bs-toggle="modal" data-bs-target="#notificationsModal">
+                        @if (auth()->user()->isAdmin())
+                            <button type="button" class="bell-btn" id="notificationBell" data-bs-toggle="modal"
+                                data-bs-target="#notificationsModal">
                                 <i class="fas fa-bell" style="font-size: 0.95rem;"></i>
                                 <span id="notificationBadge" style="display: none;">
                                     <span id="unreadCount">0</span>
@@ -567,12 +588,11 @@
 
                         <!-- User Dropdown -->
                         <div class="dropdown">
-                            <button class="user-dropdown-toggle dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false"
-                                    style="border: none;">
+                            <button class="user-dropdown-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="border: none;">
                                 <i class="fas fa-user-circle" style="font-size: 1rem;"></i>
                                 <span>{{ auth()->user()->name }}</span>
-                                @if(auth()->user()->isAdmin())
+                                @if (auth()->user()->isAdmin())
                                     <span class="user-role-badge">Admin</span>
                                 @endif
                             </button>
@@ -582,7 +602,9 @@
                                         <i class="fas fa-id-card me-2 text-muted"></i>{{ __('messages.profile') }}
                                     </a>
                                 </li>
-                                <li><hr class="dropdown-divider my-1"></li>
+                                <li>
+                                    <hr class="dropdown-divider my-1">
+                                </li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -627,7 +649,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="notificationsModalLabel">{{ __('messages.notifications') }}</h5>
-                    <button id="dismissAllBtn" type="button" class="btn btn-sm btn-outline-danger ms-auto" style="display: none; margin-right: 10px;">
+                    <button id="dismissAllBtn" type="button" class="btn btn-sm btn-outline-danger ms-auto"
+                        style="display: none; margin-right: 10px;">
                         {{ __('messages.dismiss_all') }}
                     </button>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -654,7 +677,7 @@
 
         // Clear polling interval when modal closes
         let notificationPollingInterval = null;
-        document.getElementById('notificationsModal').addEventListener('hide.bs.modal', function () {
+        document.getElementById('notificationsModal').addEventListener('hide.bs.modal', function() {
             if (notificationPollingInterval !== null) {
                 clearInterval(notificationPollingInterval);
                 notificationPollingInterval = null;
@@ -665,7 +688,7 @@
         dismissAllBtn?.addEventListener('click', dismissAllNotifications);
 
         function loadNotifications() {
-            axios.get('{{ route("notifications.index") }}')
+            axios.get('{{ route('notifications.index') }}')
                 .then(response => {
                     const notifications = response.data.notifications;
                     const unreadCount = response.data.unread_count;
@@ -736,7 +759,8 @@
                     .then(() => {
                         loadNotifications();
                     })
-                    .catch(error => { /* silent */ });
+                    .catch(error => {
+                        /* silent */ });
             }
         }
 
@@ -745,11 +769,12 @@
                 .then(() => {
                     loadNotifications();
                 })
-                .catch(error => { /* silent */ });
+                .catch(error => {
+                    /* silent */ });
         }
 
         function goToReports() {
-            window.location.href = '{{ route("reports.index") }}';
+            window.location.href = '{{ route('reports.index') }}';
         }
 
         function updateBadge(count) {
@@ -767,49 +792,49 @@
             const seconds = Math.floor((now - date) / 1000);
 
             if (seconds < 60) {
-                return '{{ __("messages.just_now") }}';
+                return '{{ __('messages.just_now') }}';
             } else if (seconds < 3600) {
                 const minutes = Math.floor(seconds / 60);
-                return '{{ __("messages.minutes_ago") }}'.replace(':count', minutes);
+                return '{{ __('messages.minutes_ago') }}'.replace(':count', minutes);
             } else if (seconds < 86400) {
                 const hours = Math.floor(seconds / 3600);
-                return '{{ __("messages.hours_ago") }}'.replace(':count', hours);
+                return '{{ __('messages.hours_ago') }}'.replace(':count', hours);
             } else {
                 const days = Math.floor(seconds / 86400);
-                return '{{ __("messages.days_ago") }}'.replace(':count', days);
+                return '{{ __('messages.days_ago') }}'.replace(':count', days);
             }
         }
 
         // Load badge count on page load (without starting uncleared polling outside modal)
         @auth
-            @if(auth()->user()->isAdmin())
-                loadNotifications();
-            @endif
+        @if (auth()->user()->isAdmin())
+            loadNotifications();
+        @endif
         @endauth
     </script>
 
     <script>
         // Mobile hamburger — proper open/close toggle
-        (function () {
-            const btn   = document.getElementById('mobileMenuBtn');
-            const menu  = document.getElementById('navbarCollapse');
+        (function() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('navbarCollapse');
             if (!btn || !menu) return;
 
-            btn.addEventListener('click', function () {
+            btn.addEventListener('click', function() {
                 const isOpen = menu.classList.toggle('open');
                 btn.setAttribute('aria-expanded', isOpen);
             });
 
             // Close when clicking a nav link (UX on mobile)
-            menu.querySelectorAll('.nav-link-item').forEach(function (link) {
-                link.addEventListener('click', function () {
+            menu.querySelectorAll('.nav-link-item').forEach(function(link) {
+                link.addEventListener('click', function() {
                     menu.classList.remove('open');
                     btn.setAttribute('aria-expanded', 'false');
                 });
             });
 
             // Close when clicking outside
-            document.addEventListener('click', function (e) {
+            document.addEventListener('click', function(e) {
                 if (!btn.contains(e.target) && !menu.contains(e.target)) {
                     menu.classList.remove('open');
                     btn.setAttribute('aria-expanded', 'false');
