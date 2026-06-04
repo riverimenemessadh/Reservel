@@ -25,10 +25,7 @@ class ProfileController extends Controller
             ->whereDate('start_time', today())
             ->where('status', 'active')
             ->with('asset')
-            ->get()
-            ->groupBy(function($booking) {
-                return $booking->start_time->format('H:i') . ' - ' . $booking->end_time->format('H:i');
-            });
+            ->get();
 
         return view('profile.show', [
             'user' => $targetUser,
