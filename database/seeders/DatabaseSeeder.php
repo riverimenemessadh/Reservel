@@ -12,6 +12,30 @@ use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Find an image file in database/seeders/images/ matching the asset name.
+     * Tries jpg, jpeg, png, webp. Returns base64 data-URI string or null.
+     */
+    private function imageFor(string $assetName): ?string
+    {
+        $folder = database_path('seeders/images');
+        $extensions = ['jpg', 'jpeg', 'png', 'webp'];
+
+        foreach ($extensions as $ext) {
+            $path = $folder . DIRECTORY_SEPARATOR . $assetName . '.' . $ext;
+            if (file_exists($path)) {
+                $mime = match($ext) {
+                    'jpg', 'jpeg' => 'image/jpeg',
+                    'png'         => 'image/png',
+                    'webp'        => 'image/webp',
+                };
+                return 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($path));
+            }
+        }
+
+        return null;
+    }
+
     public function run(): void
     {
         $users = [
@@ -79,10 +103,11 @@ class DatabaseSeeder extends Seeder
 
         foreach ($rooms as $room) {
             Asset::create([
-                'name' => $room['name'],
+                'name'        => $room['name'],
                 'description' => $room['description'],
-                'type' => 'room',
-                'status' => 'available',
+                'type'        => 'room',
+                'status'      => 'available',
+                'image'       => $this->imageFor($room['name']),
             ]);
         }
 
@@ -99,10 +124,11 @@ class DatabaseSeeder extends Seeder
 
         foreach ($equipment as $item) {
             Asset::create([
-                'name' => $item['name'],
+                'name'        => $item['name'],
                 'description' => $item['description'],
-                'type' => 'equipment',
-                'status' => 'available',
+                'type'        => 'equipment',
+                'status'      => 'available',
+                'image'       => $this->imageFor($item['name']),
             ]);
         }
 
