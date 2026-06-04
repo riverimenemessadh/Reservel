@@ -195,4 +195,5 @@ return [
     'drop_image_here' => 'أفلت الصورة هنا أو',
     'image_selected'  => 'تم اختيار الصورة',
     'asset_already_in_repair' => 'هذا العنصر قيد الإصلاح بالفعل.',
-];
+    'active' => 'نشط',
+    ];

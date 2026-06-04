@@ -158,7 +158,7 @@
     {{-- Page Header --}}
     <div class="fade-in stagger-1 d-flex align-items-center gap-3 mb-4">
         <div class="page-header-icon">
-            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-circle-user"></i>
         </div>
         <div>
             <h1 style="font-size:1.45rem; font-weight:700; color:#154269; margin:0; line-height:1.2;">
@@ -242,7 +242,7 @@
                         {{ $slotBookings->first()->end_time->format('H:i') }}
                     </span>
                     <span class="status-badge">
-                        <i class="fas fa-check-circle me-1"></i>{{ __('messages.active') ?? 'Active' }}
+                        <i class="fas fa-check-circle me-1"></i>{{ __('messages.active') }}
                     </span>
                 </div>
 

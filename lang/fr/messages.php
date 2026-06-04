@@ -195,4 +195,5 @@ return [
     'drop_image_here' => 'Déposer une image ici ou',
     'image_selected'  => 'Image sélectionnée',
     'asset_already_in_repair' => 'Cet élément est déjà en cours de réparation.',
+    'active' => 'Active',
     ];
